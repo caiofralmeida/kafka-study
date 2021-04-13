@@ -17,6 +17,13 @@ services:
   kafka-manager:
     image: hlebalbau/kafka-manager:stable
     ports:
-      - "9000:9000"
+      - "9001:9001"
     environment:
       ZK_HOSTS: "zookeeper:2181"
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: "kafka:9092"
+      JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
